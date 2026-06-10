@@ -1,0 +1,300 @@
+     | Cacau Show   |
+|         9 |          13 | Suco de Goiaba   |  12.00 |  170 | 2023-09-03   | ?
+    | Natural One  |
+|        10 |          14 | Painel da TV     | 350.00 |   10 | 2019-04-23   | ?
+    | DJ Móveis    |
+|        11 |          15 | Bola de futebol  |  90.00 |   49 | 2018-03-28   | ?
+    | Adidas       |
+|        12 |          16 | Blush            |  15.00 |  130 | 2017-02-17   | ?
+    | Dior         |
+|        13 |          17 | Café             |  35.00 |   40 | 2017-09-07   | ?
+    | Pilão        |
+|        14 |          18 | Cimento 10kg     | 150.00 |   10 | 2015-02-07   | ?
+    | Votoran      |
+|        15 |          19 | Boneca           |  78.00 |  207 | 2016-01-02   | ?
+    | Barbie       |
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+14 rows in set (0.000 sec)
+
+MariaDB [produtos]> select * from produtos where marca = 'Adidas';
++-----------+-------------+-----------------+-------+------+--------------+-----
+--+--------+
+| idproduto | idcategoria | nomeproduto     | preco | qtde | datacadastro | ativ
+o | marca  |
++-----------+-------------+-----------------+-------+------+--------------+-----
+--+--------+
+|        11 |          15 | Bola de futebol | 90.00 |   49 | 2018-03-28   | ?
+  | Adidas |
++-----------+-------------+-----------------+-------+------+--------------+-----
+--+--------+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select * from produtos where preco > 20;
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+| idproduto | idcategoria | nomeproduto      | preco  | qtde | datacadastro | at
+ivo | marca        |
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+|         1 |           3 | Cortina de 3m    | 495.65 |   20 | 2026-05-27   | ?
+    | Bella Janela |
+|         3 |           7 | Violão           | 899.99 |   15 | 2026-05-30   | ?
+    | Tagima       |
+|         5 |           9 | Camiseta Social  |  70.00 |   47 | 2023-01-09   | ?
+    | Renner       |
+|         6 |          10 | Salto alto       | 190.00 |   39 | 2025-06-01   | ?
+    | YSL          |
+|         7 |          11 | Livro de Romance |  50.00 |  128 | 2021-08-01   | ?
+    | Panini       |
+|        10 |          14 | Painel da TV     | 350.00 |   10 | 2019-04-23   | ?
+    | DJ Móveis    |
+|        11 |          15 | Bola de futebol  |  90.00 |   49 | 2018-03-28   | ?
+    | Adidas       |
+|        13 |          17 | Café             |  35.00 |   40 | 2017-09-07   | ?
+    | Pilão        |
+|        14 |          18 | Cimento 10kg     | 150.00 |   10 | 2015-02-07   | ?
+    | Votoran      |
+|        15 |          19 | Boneca           |  78.00 |  207 | 2016-01-02   | ?
+    | Barbie       |
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+10 rows in set (0.000 sec)
+
+MariaDB [produtos]> select * from produtos where preco <= 60;
++-----------+-------------+------------------+-------+------+--------------+----
+---+-------------+
+| idproduto | idcategoria | nomeproduto      | preco | qtde | datacadastro | ati
+vo | marca       |
++-----------+-------------+------------------+-------+------+--------------+----
+---+-------------+
+|         4 |           8 | Cabo da fonte    | 20.00 |   50 | 2024-09-12   | ?
+   | Gigabyte    |
+|         7 |          11 | Livro de Romance | 50.00 |  128 | 2021-08-01   | ?
+   | Panini      |
+|         8 |          12 | Chocolate        | 10.00 |  230 | 2020-07-22   | ?
+   | Cacau Show  |
+|         9 |          13 | Suco de Goiaba   | 12.00 |  170 | 2023-09-03   | ?
+   | Natural One |
+|        12 |          16 | Blush            | 15.00 |  130 | 2017-02-17   | ?
+   | Dior        |
+|        13 |          17 | Café             | 35.00 |   40 | 2017-09-07   | ?
+   | Pilão       |
++-----------+-------------+------------------+-------+------+--------------+----
+---+-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [produtos]> select nomeproduto, preco from produtos order by preco asc l
+imit 5;
++----------------+-------+
+| nomeproduto    | preco |
++----------------+-------+
+| Chocolate      | 10.00 |
+| Suco de Goiaba | 12.00 |
+| Blush          | 15.00 |
+| Cabo da fonte  | 20.00 |
+| Café           | 35.00 |
++----------------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [produtos]> select nomeproduto, preco from produtos order by preco desc
+limit 5;
++---------------+--------+
+| nomeproduto   | preco  |
++---------------+--------+
+| Violão        | 899.99 |
+| Cortina de 3m | 495.65 |
+| Painel da TV  | 350.00 |
+| Salto alto    | 190.00 |
+| Cimento 10kg  | 150.00 |
++---------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [produtos]> select count(*) as total_produtos from produtos;
++----------------+
+| total_produtos |
++----------------+
+|             14 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select avg(preco) as preco_medio from produtos;
++-------------+
+| preco_medio |
++-------------+
+|  176.117143 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select nomeproduto, quant from produtos order by quant desc
+limit 1;
+ERROR 1054 (42S22): Unknown column 'quant' in 'field list'
+MariaDB [produtos]> select nomeproduto, qtde from produtos order by qtde desc li
+mit 1;
++-------------+------+
+| nomeproduto | qtde |
++-------------+------+
+| Chocolate   |  230 |
++-------------+------+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select p.Blush, c.Beleza from produtos p join categorias c o
+n p.id_categoria = c.id_categoria;
+ERROR 1146 (42S02): Table 'produtos.categorias' doesn't exist
+MariaDB [produtos]> select p.Blush, c.Beleza from produtos p join categoria c on
+ p.id_categoria = c.id_categoria;
+ERROR 1054 (42S22): Unknown column 'p.Blush' in 'field list'
+MariaDB [produtos]> select* from produtos;
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+| idproduto | idcategoria | nomeproduto      | preco  | qtde | datacadastro | at
+ivo | marca        |
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+|         1 |           3 | Cortina de 3m    | 495.65 |   20 | 2026-05-27   | ?
+    | Bella Janela |
+|         3 |           7 | Violão           | 899.99 |   15 | 2026-05-30   | ?
+    | Tagima       |
+|         4 |           8 | Cabo da fonte    |  20.00 |   50 | 2024-09-12   | ?
+    | Gigabyte     |
+|         5 |           9 | Camiseta Social  |  70.00 |   47 | 2023-01-09   | ?
+    | Renner       |
+|         6 |          10 | Salto alto       | 190.00 |   39 | 2025-06-01   | ?
+    | YSL          |
+|         7 |          11 | Livro de Romance |  50.00 |  128 | 2021-08-01   | ?
+    | Panini       |
+|         8 |          12 | Chocolate        |  10.00 |  230 | 2020-07-22   | ?
+    | Cacau Show   |
+|         9 |          13 | Suco de Goiaba   |  12.00 |  170 | 2023-09-03   | ?
+    | Natural One  |
+|        10 |          14 | Painel da TV     | 350.00 |   10 | 2019-04-23   | ?
+    | DJ Móveis    |
+|        11 |          15 | Bola de futebol  |  90.00 |   49 | 2018-03-28   | ?
+    | Adidas       |
+|        12 |          16 | Blush            |  15.00 |  130 | 2017-02-17   | ?
+    | Dior         |
+|        13 |          17 | Café             |  35.00 |   40 | 2017-09-07   | ?
+    | Pilão        |
+|        14 |          18 | Cimento 10kg     | 150.00 |   10 | 2015-02-07   | ?
+    | Votoran      |
+|        15 |          19 | Boneca           |  78.00 |  207 | 2016-01-02   | ?
+    | Barbie       |
++-----------+-------------+------------------+--------+------+--------------+---
+----+--------------+
+14 rows in set (0.000 sec)
+
+MariaDB [produtos]> select* from categoria;
++-------------+-------------------------+---------------------------------------
+--------------------+
+| idcategoria | categoria               | descricao
+                    |
++-------------+-------------------------+---------------------------------------
+--------------------+
+|           1 | Eletrônicos             | Aparelhos Celulares, notebooks, tablet
+s etc....           |
+|           2 | Limpeza                 | Produto de limpeza
+                    |
+|           3 | Decoração               |
+                    |
+|           4 | Eletrônicos             | Aparelhos Celulares, notebooks, tablet
+s etc...            |
+|           5 | Limpeza                 | Produto de limpeza
+                    |
+|           6 | Decoracao               |
+                    |
+|           7 | Instrumentos            | Instrumentos de música e som
+                    |
+|           8 | Informática             | Cabos, impressoras, etc
+                    |
+|           9 | Vestuário               | Peças de roupas dos dois gêneros
+                    |
+|          10 | Calçados                | Tênis, Calçado
+                    |
+|          11 | Livros                  | Romance, terror, comédia, aventura e e
+tec                 |
+|          12 | Alimentos               | Arroz, feijão, carne etc
+                    |
+|          13 | Bebidas                 | Suco, refrigerante, cerveja etc
+                    |
+|          14 | Móveis                  | Sofá, mesa, cadeira, cama etc
+                    |
+|          15 | Esportes                | futebol, basquete, volei, tenis de mes
+a etc               |
+|          16 | Beleza                  | Base, corretivo, pó, blush etc
+                    |
+|          17 | Mercearia               | Alimentos e produtos de uso diário
+                    |
+|          18 | Materiais de Construção | Para construções de vários padrões
+                    |
+|          19 | Brinquedos              | Serve para todas as idades brincarem e
+ ter muita diversão |
++-------------+-------------------------+---------------------------------------
+--------------------+
+19 rows in set (0.000 sec)
+
+MariaDB [produtos]> select Blusk, Beleza from produtos join categoria on p.id16=
+ c.id16;
+ERROR 1054 (42S22): Unknown column 'Blusk' in 'field list'
+MariaDB [produtos]> select Blush, Beleza from produtos join categoria on p.id16=
+ c.id16;
+ERROR 1054 (42S22): Unknown column 'Blush' in 'field list'
+MariaDB [produtos]> select p.Blush, c.Beleza from produtos p join categorias c
+on p.id16= c.id16;
+ERROR 1146 (42S02): Table 'produtos.categorias' doesn't exist
+MariaDB [produtos]> select p.Blush, c.Beleza from produto p join categoria c  on
+ p.id16= c.id16;
+ERROR 1146 (42S02): Table 'produtos.produto' doesn't exist
+MariaDB [produtos]> select p.Blush, c.Beleza from produtos p join categoria c  o
+n p.id16= c.id16;
+ERROR 1054 (42S22): Unknown column 'p.Blush' in 'field list'
+MariaDB [produtos]> select 'p.Blush', 'c.Beleza' from produtos p join categoria
+c  on p.id16= c.id16;
+ERROR 1054 (42S22): Unknown column 'p.id16' in 'on clause'
+MariaDB [produtos]> select Blush, Beleza from produtos p join categoria c on
+p.id_16 = c.id_16;
+ERROR 1054 (42S22): Unknown column 'Blush' in 'field list'
+MariaDB [produtos]> select p.nomeproduto, c.categoria from produtos p join categ
+oria c on p.idcategoria = c.idcategoria;
++------------------+-------------------------+
+| nomeproduto      | categoria               |
++------------------+-------------------------+
+| Cortina de 3m    | Decoração               |
+| Violão           | Instrumentos            |
+| Cabo da fonte    | Informática             |
+| Camiseta Social  | Vestuário               |
+| Salto alto       | Calçados                |
+| Livro de Romance | Livros                  |
+| Chocolate        | Alimentos               |
+| Suco de Goiaba   | Bebidas                 |
+| Painel da TV     | Móveis                  |
+| Bola de futebol  | Esportes                |
+| Blush            | Beleza                  |
+| Café             | Mercearia               |
+| Cimento 10kg     | Materiais de Construção |
+| Boneca           | Brinquedos              |
++------------------+-------------------------+
+14 rows in set (0.001 sec)
+
+MariaDB [produtos]> select p.nomeproduto, p.marca, p.preco, from produtos p join
+ categoria c on p.idcategoria = c.idcategoria where c.categoria = 'Beleza';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near 'fro
+m produtos p join categoria c on p.idcategoria = c.idcategoria where c.cat...' a
+t line 1
+MariaDB [produtos]> select p.nomeproduto, p.marca, p.preco from produtos p join
+categoria c on p.idcategoria = c.idcategoria where c.categoria = 'Beleza';
++-------------+-------+-------+
+| nomeproduto | marca | preco |
++-------------+-------+-------+
+| Blush       | Dior  | 15.00 |
++-------------+-------+-------+
+1 row in set (0.001 sec)
+
+MariaDB [produtos]> select .categoria, count(*) as total_produtos from produtos
+p join categoria c on p.idcategoria = c.idcategoria group by c.categoria;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near ' co
+unt(*) as total_produtos from produtos p join categoria c on p.idcategoria...' a
+t line 1
+MariaDB [produtos]> select .categoria, count(*) as total_produtos from produtos
+p join categoria c on p.idcategoria = c.idcategoria group by c.categoria;
