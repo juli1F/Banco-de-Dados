@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/07/2026 às 21:13
+-- Tempo de geração: 29/07/2026 às 21:20
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `hotel`
 --
+CREATE DATABASE IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `hotel`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +30,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cliente` (
-  `codcliente` int(11) NOT NULL,
+  `Codcliente` int(11) NOT NULL,
   `cliente` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `cpf` varchar(20) NOT NULL
@@ -42,13 +44,13 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `hospedagem` (
   `codhospedagem` int(11) NOT NULL,
-  `dateentrada` date NOT NULL,
-  `datesaida` date NOT NULL,
-  `horaentrada` time DEFAULT NULL,
-  `horasaida` time DEFAULT NULL,
-  `total` decimal(7,2) NOT NULL,
-  `codclient` int(11) DEFAULT NULL,
-  `codquart` int(11) DEFAULT NULL
+  `dataentrada` date DEFAULT NULL,
+  `datasaida` date DEFAULT NULL,
+  `horaentrada` date DEFAULT NULL,
+  `horasaida` date DEFAULT NULL,
+  `totalhospedagem` decimal(7,2) DEFAULT NULL,
+  `codcli` int(11) DEFAULT NULL,
+  `codquarto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -58,7 +60,7 @@ CREATE TABLE `hospedagem` (
 --
 
 CREATE TABLE `quarto` (
-  `codquarto` int(11) NOT NULL,
+  `Codquarto` int(11) NOT NULL,
   `quarto` varchar(255) NOT NULL,
   `andar` varchar(255) NOT NULL,
   `tipo` varchar(50) NOT NULL
@@ -71,25 +73,11 @@ CREATE TABLE `quarto` (
 --
 
 CREATE TABLE `servico` (
-  `codservico` int(11) NOT NULL,
+  `Codservico` int(11) NOT NULL,
   `servico` varchar(255) NOT NULL,
   `valor` decimal(7,2) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
-  `qtde` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `servicoshospedagem`
---
-
-CREATE TABLE `servicoshospedagem` (
-  `codhospedagem` int(11) DEFAULT NULL,
-  `codservico` int(11) DEFAULT NULL,
-  `datacompra` date NOT NULL,
-  `horacompra` time NOT NULL,
-  `totalservico` decimal(7,2) DEFAULT NULL
+  `qtde` int(11) NOT NULL,
+  `tipo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -100,7 +88,7 @@ CREATE TABLE `servicoshospedagem` (
 -- Índices de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`codcliente`),
+  ADD PRIMARY KEY (`Codcliente`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `cpf` (`cpf`);
 
@@ -109,28 +97,20 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `hospedagem`
   ADD PRIMARY KEY (`codhospedagem`),
-  ADD KEY `codclient` (`codclient`),
-  ADD KEY `codquart` (`codquart`);
+  ADD KEY `codcli` (`codcli`),
+  ADD KEY `codquarto` (`codquarto`);
 
 --
 -- Índices de tabela `quarto`
 --
 ALTER TABLE `quarto`
-  ADD PRIMARY KEY (`codquarto`);
+  ADD PRIMARY KEY (`Codquarto`);
 
 --
 -- Índices de tabela `servico`
 --
 ALTER TABLE `servico`
-  ADD PRIMARY KEY (`codservico`),
-  ADD UNIQUE KEY `tipo` (`tipo`);
-
---
--- Índices de tabela `servicoshospedagem`
---
-ALTER TABLE `servicoshospedagem`
-  ADD KEY `codhospedagem` (`codhospedagem`),
-  ADD KEY `codservico` (`codservico`);
+  ADD PRIMARY KEY (`Codservico`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -140,7 +120,7 @@ ALTER TABLE `servicoshospedagem`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `codcliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Codcliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `hospedagem`
@@ -152,13 +132,13 @@ ALTER TABLE `hospedagem`
 -- AUTO_INCREMENT de tabela `quarto`
 --
 ALTER TABLE `quarto`
-  MODIFY `codquarto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Codquarto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
-  MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Codservico` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
@@ -168,15 +148,8 @@ ALTER TABLE `servico`
 -- Restrições para tabelas `hospedagem`
 --
 ALTER TABLE `hospedagem`
-  ADD CONSTRAINT `hospedagem_ibfk_1` FOREIGN KEY (`codclient`) REFERENCES `cliente` (`codcliente`),
-  ADD CONSTRAINT `hospedagem_ibfk_2` FOREIGN KEY (`codquart`) REFERENCES `quarto` (`codquarto`);
-
---
--- Restrições para tabelas `servicoshospedagem`
---
-ALTER TABLE `servicoshospedagem`
-  ADD CONSTRAINT `servicoshospedagem_ibfk_1` FOREIGN KEY (`codhospedagem`) REFERENCES `hospedagem` (`codhospedagem`),
-  ADD CONSTRAINT `servicoshospedagem_ibfk_2` FOREIGN KEY (`codservico`) REFERENCES `servico` (`codservico`);
+  ADD CONSTRAINT `hospedagem_ibfk_1` FOREIGN KEY (`codcli`) REFERENCES `cliente` (`Codcliente`),
+  ADD CONSTRAINT `hospedagem_ibfk_2` FOREIGN KEY (`codquarto`) REFERENCES `quarto` (`Codquarto`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
