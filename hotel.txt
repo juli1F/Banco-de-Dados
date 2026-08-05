@@ -1,0 +1,40 @@
+create table cliente(
+    codcliente int primary key auto_increment,
+    cliente varchar(255) not null,
+    email varchar(255) unique not null,
+    cpf varchar(20) unique not null);
+    
+create table quarto(
+    codquarto int primary key auto_increment,
+    quarto varchar(255) not null,
+    andar varchar(255) not null,
+    tipo varchar(50) not null);
+    
+create table servico(
+    codcservico int primary key auto_increment,
+    servico varchar(255) not null,
+    valor decimal(7,2) not null,
+    tipo varchar(20) unique not null,
+    qtde int not null);
+    
+create table hospedagem(
+    codhospedagem int primary key auto_increment,
+    dateentrada date not null,
+    datesaida date not null,
+    horaentrada time, 
+    horasaida time,
+    total decimal(7,2) not null,
+    codclient int,
+    codquart int,
+    foreign key (codclient) references cliente  (codcliente),
+    foreign key (codquart) references quarto (codquarto));
+    
+create table servicoshospedagem(
+    codhospedagem int,
+    codservico int,
+    datacompra date not null,
+    horacompra time not null,
+    totalservico decimal(7,2),
+    foreign key (codhospedagem) references hospedagem (codhospedagem),
+    foreign key (codservico) references servico (codservico));
+    
